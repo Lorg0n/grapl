@@ -1,16 +1,18 @@
+import com.huskerdev.openglfx.plugins.utils.pom
+
 plugins {
-    alias(libs.plugins.pkmerboot.central.publisher)
+    `maven-publish`
+
     alias(libs.plugins.kotlin.jvm)
     `java-library` 
-
-    id("utils")
+    id("utils") 
 }
 
 allprojects {
     repositories {
         mavenCentral()
     }
-    group = "com.github.lorg0n"
+    group = "com.github.lorg0n" 
     version = project.property("version") ?: "dev" 
 }
 
@@ -20,8 +22,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Grapl Fork")
-                description.set("A forked version of the Grapl library.")
+                name.set("Grapl Fork by Lorg0n")
+                description.set("A forked version of the Grapl library with custom changes.")
                 url.set("https://github.com/Lorg0n/grapl")
                 licenses {
                     license {
@@ -32,8 +34,8 @@ publishing {
                 developers {
                     developer {
                         id.set("Lorg0n")
-                        name.set("Your Name")
-                        email.set("your-email@example.com")
+                        name.set("Lorg0n")
+                        email.set("lorgon.kv@gmail.com") 
                     }
                 }
                 scm {
@@ -50,8 +52,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/Lorg0n/grapl")
             credentials {
-                username = System.getenv("GPR_USER") 
-                password = System.getenv("GPR_KEY")  
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_KEY")
             }
         }
     }

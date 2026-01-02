@@ -13,10 +13,10 @@ jni_linux_glx_manager(void, nSetSwapInterval)(JNIEnv* env, jobject, jlong _displ
     Display* display = (Display*)_display;
     Window window = (Window)_window;
 
-    if (glXSwapIntervalEXT)
-        glXSwapIntervalEXT(display, window, swapInterval);
-    else if(glXSwapIntervalMESA)
-        glXSwapIntervalMESA(swapInterval);
-    else if(glXSwapIntervalSGI)
-        glXSwapIntervalSGI(swapInterval);
+    if (_glXSwapIntervalEXT)
+        _glXSwapIntervalEXT(display, window, swapInterval);
+    else if(_glXSwapIntervalMESA)
+        _glXSwapIntervalMESA(swapInterval);
+    else if(_glXSwapIntervalSGI)
+        _glXSwapIntervalSGI(swapInterval);
 }

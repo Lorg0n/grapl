@@ -1,9 +1,9 @@
 #include "gl-linux-glx.h"
 
-glXCreateContextAttribsARBPtr glXCreateContextAttribsARB = NULL;
-glXSwapIntervalEXTPtr         glXSwapIntervalEXT = NULL;
-glXSwapIntervalMESAPtr        glXSwapIntervalMESA = NULL;
-glXSwapIntervalMESAPtr        glXSwapIntervalSGI = NULL;
+glXCreateContextAttribsARBPtr _glXCreateContextAttribsARB = NULL;
+glXSwapIntervalEXTPtr         _glXSwapIntervalEXT = NULL;
+glXSwapIntervalMESAPtr        _glXSwapIntervalMESA = NULL;
+glXSwapIntervalMESAPtr        _glXSwapIntervalSGI = NULL;
 
 
 static void getContextDetailsGLX(GLDetails* details, Display* display, GLXDrawable drawable, GLXContext context){
@@ -18,14 +18,14 @@ static void getContextDetailsGLX(GLDetails* details, Display* display, GLXDrawab
 
 
 jni_linux_glx_context(void, nInitFunctions)(JNIEnv* env, jobject) {
-    glXCreateContextAttribsARB = (glXCreateContextAttribsARBPtr)_GetProcAddress("glXCreateContextAttribsARB");
-    glXSwapIntervalEXT = (glXSwapIntervalEXTPtr)_GetProcAddress("glXSwapIntervalEXT");
-    glXSwapIntervalMESA = (glXSwapIntervalMESAPtr)_GetProcAddress("glXSwapIntervalMESA");
-    glXSwapIntervalSGI = (glXSwapIntervalMESAPtr)_GetProcAddress("glXSwapIntervalSGI");
+    _glXCreateContextAttribsARB = (glXCreateContextAttribsARBPtr)_GetProcAddress("glXCreateContextAttribsARB");
+    _glXSwapIntervalEXT = (glXSwapIntervalEXTPtr)_GetProcAddress("glXSwapIntervalEXT");
+    _glXSwapIntervalMESA = (glXSwapIntervalMESAPtr)_GetProcAddress("glXSwapIntervalMESA");
+    _glXSwapIntervalSGI = (glXSwapIntervalMESAPtr)_GetProcAddress("glXSwapIntervalSGI");
 
-    glDebugMessageCallbackARB = (glDebugMessageCallbackARBPtr)_GetProcAddress("glDebugMessageCallbackARB");
-    glGetIntegerv = (glGetIntegervPtr)_GetProcAddress("glGetIntegerv");
-    glGetStringi = (glGetStringiPtr)_GetProcAddress("glGetStringi");
+    _glDebugMessageCallbackARB = (glDebugMessageCallbackARBPtr)_GetProcAddress("glDebugMessageCallbackARB");
+    _glGetIntegerv = (glGetIntegervPtr)_GetProcAddress("glGetIntegerv");
+    _glGetStringi = (glGetStringiPtr)_GetProcAddress("glGetStringi");
 }
 
 jni_linux_glx_context(jlongArray, nCreateContext)(JNIEnv* env, jobject, jboolean isCore, jlong shareWith, jint majorVersion, jint minorVersion, jboolean debug) {
@@ -43,7 +43,7 @@ jni_linux_glx_context(jlongArray, nCreateContext)(JNIEnv* env, jobject, jboolean
             GLX_CONTEXT_FLAGS_ARB, debug ? GLX_CONTEXT_DEBUG_BIT_ARB : 0,
             None
     };
-    GLXContext context = glXCreateContextAttribsARB(display, fbc[0], (GLXContext)shareWith, true, context_attribs);
+    GLXContext context = _glXCreateContextAttribsARB(display, fbc[0], (GLXContext)shareWith, true, context_attribs);
 
     // Creating PBuffer
     int pbufferAttribs[] = {
@@ -121,7 +121,7 @@ jni_linux_glx_context(jlongArray, nCreateContextForWindow)(JNIEnv* env, jobject,
             GLX_CONTEXT_FLAGS_ARB, debug ? GLX_CONTEXT_DEBUG_BIT_ARB : 0,
             None
     };
-    GLXContext context = glXCreateContextAttribsARB(display, fbc[0], (GLXContext)shareWith, true, context_attribs);
+    GLXContext context = _glXCreateContextAttribsARB(display, fbc[0], (GLXContext)shareWith, true, context_attribs);
 
     GLDetails details = {};
     getContextDetailsGLX(&details, display, window, context);

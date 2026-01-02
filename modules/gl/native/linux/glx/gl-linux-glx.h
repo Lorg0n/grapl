@@ -14,10 +14,10 @@ typedef GLXContext (*glXCreateContextAttribsARBPtr)(Display*, GLXFBConfig, GLXCo
 typedef GLXContext (*glXSwapIntervalEXTPtr)(Display*, GLXDrawable, const int);
 typedef GLXContext (*glXSwapIntervalMESAPtr)(const int);
 
-extern glXCreateContextAttribsARBPtr glXCreateContextAttribsARB;
-extern glXSwapIntervalEXTPtr         glXSwapIntervalEXT;
-extern glXSwapIntervalMESAPtr        glXSwapIntervalMESA;
-extern glXSwapIntervalMESAPtr        glXSwapIntervalSGI;
+extern glXCreateContextAttribsARBPtr _glXCreateContextAttribsARB;
+extern glXSwapIntervalEXTPtr         _glXSwapIntervalEXT;
+extern glXSwapIntervalMESAPtr        _glXSwapIntervalMESA;
+extern glXSwapIntervalMESAPtr        _glXSwapIntervalSGI;
 
 static void* _GetProcAddress(const char* name) {
     if(libGL == NULL){

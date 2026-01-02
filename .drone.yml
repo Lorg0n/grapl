@@ -7,20 +7,12 @@ trigger:
     - tag
 
 steps:
-- name: publish
+- name: build
   image: gradle:jdk17
-  
   resources:
     limits:
       memory: 2G
       cpu: 1.5
-  
-  environment:
-    GPR_USER:
-      from_secret: GITHUB_USERNAME
-    GPR_KEY:
-      from_secret: GITHUB_PAT
-      
   commands:
     - echo "Enabling 32-bit architecture and updating package lists..."
     - dpkg --add-architecture i386
@@ -43,5 +35,18 @@ steps:
     
     - chmod +x ./gradlew
     
-    - echo "Building and publishing..."
+    - echo "Building and publishing to local repo directory..."
     - ./gradlew publish
+
+- name: create-release
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: GITHUB_PAT
+    files:
+      - "**/build/repo/**"
+    title: ${DRONE_TAG}
+    note: "Automated release for version ${DRONE_TAG}"
+  when:
+    event:
+      - tag

@@ -49,12 +49,8 @@ publishing {
 
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Lorg0n/grapl")
-            credentials {
-                username = System.getenv("GPR_USER")
-                password = System.getenv("GPR_KEY")
-            }
+            name = "LocalRepoForRelease"
+            url = uri("${buildDir}/repo")
         }
     }
 }

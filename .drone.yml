@@ -13,7 +13,7 @@ steps:
   resources:
     limits:
       memory: 2G
-      cpu: "1.5"
+      cpu: 1.5
   
   environment:
     GPR_USER:

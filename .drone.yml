@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+name: build-and-publish-linux
+
+trigger:
+  branch:
+  - tag
+
+steps:
+- name: publish
+  image: gradle:jdk17
+  
+  environment:
+    GPR_USER:
+      from_secret: GITHUB_USERNAME
+    GPR_KEY:
+      from_secret: GITHUB_PAT
+      
+  commands:
+    - echo "Installing native build dependencies..."
+    - apt-get update -y
+    - apt-get install -y g++-multilib libx11-dev libxrandr-dev libxcursor-dev libgl-dev libwayland-dev
+    
+    - chmod +x ./gradlew
+    
+    - echo "Building and publishing..."
+    - ./gradlew publish

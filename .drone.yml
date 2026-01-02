@@ -22,9 +22,23 @@ steps:
       from_secret: GITHUB_PAT
       
   commands:
-    - echo "Installing native build dependencies..."
+    - echo "Enabling 32-bit architecture and updating package lists..."
+    - dpkg --add-architecture i386
     - apt-get update -y
-    - apt-get install -y g++-multilib libx11-dev libxrandr-dev libxcursor-dev libgl-dev libwayland-dev
+    
+    - echo "Installing native build dependencies for both 64-bit and 32-bit..."
+    - apt-get install -y \
+        g++-multilib \
+        libx11-dev \
+        libxrandr-dev \
+        libxcursor-dev \
+        libgl-dev \
+        libwayland-dev \
+        libx11-dev:i386 \
+        libxrandr-dev:i386 \
+        libxcursor-dev:i386 \
+        libgl-dev:i386 \
+        libwayland-dev:i386
     
     - chmod +x ./gradlew
     

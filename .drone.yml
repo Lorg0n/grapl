@@ -9,6 +9,11 @@ trigger:
 steps:
 - name: publish
   image: gradle:jdk17
+
+  resources:
+    limits:
+      memory: 2G
+      cpu: "1.5"
   
   environment:
     GPR_USER:

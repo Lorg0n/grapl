@@ -9,7 +9,7 @@ trigger:
 steps:
 - name: publish
   image: gradle:jdk17
-
+  
   resources:
     limits:
       memory: 2G
@@ -27,18 +27,19 @@ steps:
     - apt-get update -y
     
     - echo "Installing native build dependencies for both 64-bit and 32-bit..."
-    - apt-get install -y \
-        g++-multilib \
-        libx11-dev \
-        libxrandr-dev \
-        libxcursor-dev \
-        libgl-dev \
-        libwayland-dev \
-        libx11-dev:i386 \
-        libxrandr-dev:i386 \
-        libxcursor-dev:i386 \
-        libgl-dev:i386 \
-        libwayland-dev:i386
+    - >
+      apt-get install -y
+      g++-multilib
+      libx11-dev
+      libxrandr-dev
+      libxcursor-dev
+      libgl-dev
+      libwayland-dev
+      libx11-dev:i386
+      libxrandr-dev:i386
+      libxcursor-dev:i386
+      libgl-dev:i386
+      libwayland-dev:i386
     
     - chmod +x ./gradlew
     

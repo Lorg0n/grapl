@@ -3,8 +3,8 @@ type: docker
 name: build-and-publish-linux
 
 trigger:
-  branch:
-  - tag
+  event:
+    - tag
 
 steps:
 - name: publish

@@ -40,7 +40,7 @@ typedef const GLubyte* (*glGetStringiPtr)(GLenum name, GLuint index);
 typedef void (*glDebugMessageCallbackARBPtr)(GLDEBUGPROCARB callback, const void *userParam);
 
 extern glGetIntegervPtr _glGetIntegerv;
-extern glGetStringiPtr _glGetStringi;
+extern glGetStringiPtr glGetStringi;
 extern glDebugMessageCallbackARBPtr _glDebugMessageCallbackARB;
 
 struct GLDetails {

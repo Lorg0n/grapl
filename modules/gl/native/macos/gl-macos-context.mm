@@ -1,7 +1,7 @@
 #import "gl-macos.h"
 
 glGetIntegervPtr _glGetIntegerv;
-glGetStringiPtr _glGetStringi;
+glGetStringiPtr glGetStringi;
 
 static void getContextDetailsCGL(GLDetails* details, CGLContextObj context){
     CGLContextObj oldContext = CGLGetCurrentContext();
@@ -14,7 +14,7 @@ static void getContextDetailsCGL(GLDetails* details, CGLContextObj context){
 
 jni_macos_context(void, nInitFunctions)(JNIEnv* env, jobject) {
     _glGetIntegerv = (glGetIntegervPtr) a_GetProcAddress("_glGetIntegerv");
-    _glGetStringi = (glGetStringiPtr) a_GetProcAddress("_glGetStringi");
+    glGetStringi = (glGetStringiPtr) a_GetProcAddress("glGetStringi");
 }
 
 jni_macos_context(jlongArray, nCreateContext)(JNIEnv* env, jobject,

@@ -17,7 +17,7 @@ eglSwapBuffersPtr         eglSwapBuffers;
 eglSwapIntervalPtr        eglSwapInterval;
 
 glGetIntegervPtr          _glGetIntegerv;
-glGetStringiPtr           _glGetStringi;
+glGetStringiPtr           glGetStringi;
 glDebugMessageCallbackARBPtr _glDebugMessageCallbackARB;
 
 
@@ -57,7 +57,7 @@ jni_linux_egl_context(void, nInitFunctions)(JNIEnv* env, jobject) {
 
     _glDebugMessageCallbackARB = (glDebugMessageCallbackARBPtr)eglGetProcAddress("_glDebugMessageCallbackARB");
     _glGetIntegerv = (glGetIntegervPtr)eglGetProcAddress("_glGetIntegerv");
-    _glGetStringi = (glGetStringiPtr)eglGetProcAddress("_glGetStringi");
+    glGetStringi = (glGetStringiPtr)eglGetProcAddress("glGetStringi");
 }
 
 jni_linux_egl_context(jlongArray, nCreateContext)(JNIEnv* env, jobject, jboolean isCore, jlong shareWith, jint majorVersion, jint minorVersion, jboolean debug) {

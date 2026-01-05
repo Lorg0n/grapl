@@ -12,7 +12,7 @@ wglCreateContextAttribsARBPtr       wglCreateContextAttribsARB;
 wglSwapIntervalEXTPtr               wglSwapIntervalEXT;
 
 glGetIntegervPtr _glGetIntegerv;
-glGetStringiPtr _glGetStringi;
+glGetStringiPtr glGetStringi;
 glDebugMessageCallbackARBPtr _glDebugMessageCallbackARB;
 
 
@@ -75,7 +75,7 @@ jni_win_context(void, nInitFunctions)(JNIEnv* env, jobject) {
         wglCreateContextAttribsARB = (wglCreateContextAttribsARBPtr) _GetProcAddress("wglCreateContextAttribsARB");
         wglSwapIntervalEXT = (wglSwapIntervalEXTPtr) _GetProcAddress("wglSwapIntervalEXT");
         _glGetIntegerv = (glGetIntegervPtr) _GetProcAddress("_glGetIntegerv");
-        _glGetStringi = (glGetStringiPtr) _GetProcAddress("_glGetStringi");
+        glGetStringi = (glGetStringiPtr) _GetProcAddress("glGetStringi");
         _glDebugMessageCallbackARB = (glDebugMessageCallbackARBPtr) _GetProcAddress("_glDebugMessageCallbackARB");
 
         // Destroy dummy context
